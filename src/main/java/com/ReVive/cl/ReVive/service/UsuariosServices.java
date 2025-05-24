@@ -39,6 +39,7 @@ public class UsuariosServices {
             usuarioToUpdate.setSucursal(usuario.getSucursal());
             usuarioToUpdate.setRol(usuario.getRol());
             usuarioToUpdate.setContraseniaUsuario(usuario.getContraseniaUsuario());
+            usuarioToUpdate.setSalario(usuario.getSalario());
             return usuariosRepository.save(usuarioToUpdate);
         } else {
             return null;
@@ -68,6 +69,9 @@ public class UsuariosServices {
             }
             if (usuario.getContraseniaUsuario() != null) {
                 usuarioToPatch.setContraseniaUsuario(usuario.getContraseniaUsuario());
+            }
+            if (usuario.getSalario() != null) {
+                usuarioToPatch.setSalario(usuario.getSalario());
             }
             return usuariosRepository.save(usuarioToPatch);
         } else {
