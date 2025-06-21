@@ -77,4 +77,13 @@ public class ProductoServices {
     public Producto findById(Long id) {
         return productoRepository.findById(id).orElse(null);
     }
+
+    public List<Producto> findByNombreProductoAndCategoria(String nombre, String nombreCategoria) {
+        return productoRepository.findByNombreProductoAndCategoria_NombreCatesProducto(nombre, nombreCategoria);
+    }
+
+    public List<Producto> findProductosByCategoriaAndSucursal(String categoria, String sucursal) {
+        return productoRepository.findProductosByCategoriaAndSucursal(categoria, sucursal);
+    }
+
 }

@@ -8,5 +8,6 @@ import com.ReVive.cl.ReVive.model.Region;
 
 @Repository
 public interface RegionRepository extends JpaRepository<Region, Long>{
+    
     Region findByIdRegion(Long idRegion);
 }

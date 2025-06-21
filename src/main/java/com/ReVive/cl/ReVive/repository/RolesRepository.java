@@ -8,6 +8,8 @@ import com.ReVive.cl.ReVive.model.Roles;
 @Repository
 
 public interface RolesRepository extends JpaRepository<Roles, Long>{
+    
     Roles findByNombreRoles(String nombreRoles);
+
     Roles findByIdRoles(Long idRoles);
 }

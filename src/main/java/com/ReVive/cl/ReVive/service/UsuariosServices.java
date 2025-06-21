@@ -101,4 +101,8 @@ public class UsuariosServices {
         return usuariosRepository.findUsuariosConSalarioMayorAlPromedio();
     }
 
+    public List<Usuarios> findByRolAndSucursal(String rol, String sucursal) {
+        return usuariosRepository.findByRol_NombreRolesAndSucursal_RazonSocialSucursal(rol, sucursal);
+    }
+
 }

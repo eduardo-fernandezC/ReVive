@@ -58,10 +58,17 @@ public class ResiduosServices {
     public void delete(Long id) {
         residuosRepository.deleteById(id);
     }
+
     public List<Residuos> findByCantidadResiduos(int cantidadResiduos){
         return residuosRepository.findByCantidadResiduos(cantidadResiduos);
     }
+    
     public Residuos findByIdResiduos(Long idResiduos) {
         return residuosRepository.findById(idResiduos).orElse(null);
     }
+
+    public List<Residuos> findByCategoriaAndSucursal(String categoria, String sucursal) {
+        return residuosRepository.findByCategoriaResiduos_NombreCatesResiduosAndSucursal_RazonSocialSucursal(categoria, sucursal);
+    }
+
 }

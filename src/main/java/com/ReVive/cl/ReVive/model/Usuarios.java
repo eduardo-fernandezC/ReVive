@@ -29,13 +29,13 @@ public class Usuarios {
     @Column(unique = true, length = 13, nullable = false)
     private String runUsuario;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 30)
     private String nombreUsuario;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 30)
     private String apellidoUsuario;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = false, length = 80)
     private String direccionUsuario;
 
     @Column(unique = true, nullable = false, length = 30)
@@ -45,6 +45,7 @@ public class Usuarios {
     @Column(nullable = false, length = 13)
     private String contraseniaUsuario;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = true)
     private Double salario;
     

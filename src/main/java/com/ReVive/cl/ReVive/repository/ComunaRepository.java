@@ -8,5 +8,4 @@ import com.ReVive.cl.ReVive.model.Comuna;
 
 @Repository
 public interface ComunaRepository extends JpaRepository<Comuna, Long> {
-
 }

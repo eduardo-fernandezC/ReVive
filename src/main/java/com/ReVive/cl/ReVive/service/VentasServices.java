@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ReVive.cl.ReVive.model.Ventas;
+import com.ReVive.cl.ReVive.repository.DetalleVentaRepository;
 import com.ReVive.cl.ReVive.repository.VentasRepository;
 
 import jakarta.transaction.Transactional;
@@ -15,8 +16,13 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class VentasServices {
 
+
     @Autowired
     private VentasRepository ventasRepository;
+
+    @Autowired
+    private DetalleVentaRepository detalleVentaRepository;
+
 
     public List<Ventas> findAll() {
         return ventasRepository.findAll();
@@ -61,7 +67,13 @@ public class VentasServices {
     }
 
     public void delete(Long id) {
+        Ventas venta = ventasRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("venta no encontrada"));
+        
+
+        detalleVentaRepository.deleteByVentas(venta);
         ventasRepository.deleteById(id);
+
     }
 
     public List<Ventas> findByfechaVentas(Date fechaVenta) {
@@ -71,4 +83,13 @@ public class VentasServices {
     public Ventas findByIdVentas(Long id) {
         return ventasRepository.findById(id).orElse(null);
     }
+
+    public List<Ventas> findByUsuarioAndSucursal(String nombreUsuario, String sucursal) {
+        return ventasRepository.findByUsuario_NombreUsuarioAndSucursal_RazonSocialSucursal(nombreUsuario, sucursal);
+    }
+
+    public List<Ventas> buscarVentasPorSucursalYCategoria(String nombreSucursal, String nombreCategoria) {
+        return ventasRepository.buscarVentasPorSucursalYCategoria(nombreSucursal, nombreCategoria);
+    }
+
 }

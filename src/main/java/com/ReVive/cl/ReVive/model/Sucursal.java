@@ -22,9 +22,9 @@ public class Sucursal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSucursal;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 40)
     private String razonSocialSucursal;
 
-    @Column(nullable = false, length = 40)
+    @Column(nullable = false, length = 80)
     private String direccionSucursal;
 }

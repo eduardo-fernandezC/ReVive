@@ -24,10 +24,10 @@ public class Sector {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSector;
 
-    @Column(nullable = true, length = 30)
+    @Column(nullable = true, length = 60)
     private String nombreSector;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = false, length = 80)
     private String direccionSector;
 
     @ManyToOne

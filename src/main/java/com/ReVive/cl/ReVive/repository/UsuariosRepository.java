@@ -18,10 +18,11 @@ public interface UsuariosRepository extends JpaRepository<Usuarios, Long>{
 
     List<Usuarios> findByRolIdRoles(Long idRol);
 
+    List<Usuarios> findByRol_NombreRolesAndSucursal_RazonSocialSucursal(String rol, String sucursal);
+
     @Query("SELECT u FROM Usuarios u WHERE u.rol.nombreRoles = :nombreRol")
     List<Usuarios> findByRolNombreRoles(String nombreRol);
 
     @Query("SELECT u FROM Usuarios u WHERE u.salario > (SELECT AVG(u2.salario) FROM Usuarios u2)")
     List<Usuarios> findUsuariosConSalarioMayorAlPromedio();
-
 }

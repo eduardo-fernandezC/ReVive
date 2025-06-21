@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ReVive.cl.ReVive.model.CategoriasResiduos;
 import com.ReVive.cl.ReVive.repository.CategoriasResiduosRepository;
+import com.ReVive.cl.ReVive.repository.ResiduosRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -17,6 +18,10 @@ public class CategoriasResiduosServices {
     @Autowired
     private CategoriasResiduosRepository categoriasResiduosRepository;
 
+    @Autowired
+    private ResiduosRepository residuosRepository;
+
+    
     public List<CategoriasResiduos> findAll() {
         return categoriasResiduosRepository.findAll();
     }
@@ -46,7 +51,14 @@ public class CategoriasResiduosServices {
     }
 
     public void delete(Long id) {
+        CategoriasResiduos categoriasresiduos = categoriasResiduosRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("residuo no encontrado"));
+
+
+        residuosRepository.deleteByCategoriaResiduos(categoriasresiduos);
+
         categoriasResiduosRepository.deleteById(id);
+
     }
     public CategoriasResiduos findByNombreCatesResiduos(String nombreCatesResiduos){
         return categoriasResiduosRepository.findByNombreCatesResiduos(nombreCatesResiduos);

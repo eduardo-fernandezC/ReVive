@@ -80,4 +80,8 @@ public class DetalleVentaServices {
     public List<DetalleVenta> findByProducto(Producto producto) {
         return detalleVentaRepository.findByProducto(producto);
     }
+
+    public List<DetalleVenta> buscarDetallePorUsuarioYCategoria(String nombreUsuario, String nombreCategoria) {
+        return detalleVentaRepository.buscarDetallePorUsuarioYCategoria(nombreUsuario, nombreCategoria);
+    }
 }

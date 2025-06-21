@@ -18,14 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ReVive.cl.ReVive.model.CategoriasResiduos;
 import com.ReVive.cl.ReVive.service.CategoriasResiduosServices;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/v1/categoriasResiduos")
+@Tag(name = "Categorias de Residuos", description = "Operaciones relacionadas con las categorias de residuos")
 public class CategoriaResiduosController {
 
     @Autowired
     private CategoriasResiduosServices categoriasResiduosServices;
 
     @GetMapping
+    @Operation(summary = "Listar todas las categorías de residuos", description = "Obtiene una lista de todas las categorías de residuos")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Categorías encontradas"),
+        @ApiResponse(responseCode = "204", description = "No hay categorías disponibles")
+    })
     public ResponseEntity<List<CategoriasResiduos>> listar() {
         List<CategoriasResiduos> categorias = categoriasResiduosServices.findAll();
         if (categorias.isEmpty()) {
@@ -35,6 +46,11 @@ public class CategoriaResiduosController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar categoría por ID", description = "Obtiene una categoría de residuos por su ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Categoría encontrada"),
+        @ApiResponse(responseCode = "404", description = "Categoría no encontrada")
+    })
     public ResponseEntity<CategoriasResiduos> buscar(@PathVariable Long id) {
         CategoriasResiduos categoria = categoriasResiduosServices.findByIdCatesResiduos(id);
         if (categoria != null) {
@@ -45,6 +61,11 @@ public class CategoriaResiduosController {
     }
 
     @GetMapping("/buscarNombre/{nombre}")
+    @Operation(summary = "Buscar categoría por nombre", description = "Obtiene una categoría de residuos por su nombre")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Categoría encontrada"),
+        @ApiResponse(responseCode = "404", description = "Categoría no encontrada")
+    })
     public ResponseEntity<CategoriasResiduos> buscarPorNombre(@PathVariable String nombre) {
         CategoriasResiduos categoria = categoriasResiduosServices.findByNombreCatesResiduos(nombre);
         if (categoria != null) {
@@ -55,12 +76,22 @@ public class CategoriaResiduosController {
     }
 
     @PostMapping
+    @Operation(summary = "Guardar una nueva categoría", description = "Crea una nueva categoría de residuos")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Categoría creada correctamente"),
+        @ApiResponse(responseCode = "400", description = "Error al crear la categoría")
+    })
     public ResponseEntity<CategoriasResiduos> guardar(@RequestBody CategoriasResiduos categoria) {
-        CategoriasResiduos categoriaGuardar = categoriasResiduosServices.save(categoria);
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaGuardar);
+        CategoriasResiduos guardada = categoriasResiduosServices.save(categoria);
+        return ResponseEntity.status(HttpStatus.CREATED).body(guardada);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Actualizar una categoría", description = "Actualiza todos los datos de una categoría de residuos")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Categoría actualizada correctamente"),
+        @ApiResponse(responseCode = "404", description = "Categoría no encontrada")
+    })
     public ResponseEntity<CategoriasResiduos> actualizar(@PathVariable Long id, @RequestBody CategoriasResiduos categoria) {
         CategoriasResiduos actualizado = categoriasResiduosServices.update(id, categoria);
         if (actualizado != null) {
@@ -71,6 +102,11 @@ public class CategoriaResiduosController {
     }
 
     @PatchMapping("/{id}")
+    @Operation(summary = "Modificar parcialmente una categoría", description = "Actualiza parcialmente una categoría de residuos")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Categoría modificada correctamente"),
+        @ApiResponse(responseCode = "404", description = "Categoría no encontrada")
+    })
     public ResponseEntity<CategoriasResiduos> patchCategoria(@PathVariable Long id, @RequestBody CategoriasResiduos categoria) {
         CategoriasResiduos actualizado = categoriasResiduosServices.patch(id, categoria);
         if (actualizado != null) {
@@ -81,7 +117,12 @@ public class CategoriaResiduosController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+    @Operation(summary = "Eliminar una categoría por ID", description = "Elimina una categoría de residuos por su ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Categoría eliminada correctamente"),
+        @ApiResponse(responseCode = "404", description = "Categoría no encontrada")
+    })
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         try {
             categoriasResiduosServices.delete(id);
             return ResponseEntity.noContent().build();

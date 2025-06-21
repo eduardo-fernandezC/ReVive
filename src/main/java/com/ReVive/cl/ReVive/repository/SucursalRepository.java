@@ -8,6 +8,8 @@ import com.ReVive.cl.ReVive.model.Sucursal;
 
 @Repository
 public interface SucursalRepository extends JpaRepository<Sucursal, Long>{
+    
     Sucursal findByRazonSocialSucursal(String razonSocialSucursal);
+
     Sucursal findByIdSucursal(Long idSucursal);
 }
