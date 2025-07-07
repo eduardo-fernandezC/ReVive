@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-@Profile("test")
+//@Profile("dev")
 public class DataLoader implements CommandLineRunner {
 
     @Autowired
